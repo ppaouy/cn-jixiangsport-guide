@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉祥体育 · 知识型入口页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f2f4f6;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #1e2a3a;
+            line-height: 1.6;
+            padding: 2rem 1.5rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* 导航/头部信息区 (非传统hero，偏向目录感) */
+        .info-header {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #d0d9e0;
+            padding-bottom: 1.2rem;
+        }
+
+        .site-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #1f3a4b;
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .site-title small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #57758b;
+            background: #e8edf0;
+            padding: 0.15rem 0.9rem;
+            border-radius: 18px;
+            letter-spacing: 0.3px;
+        }
+
+        .sub-desc {
+            margin-top: 0.6rem;
+            color: #3d5668;
+            font-size: 1rem;
+            max-width: 700px;
+            border-left: 3px solid #b3c7d6;
+            padding-left: 1rem;
+            background: #f8fafb;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.7;
+        }
+
+        /* 卡片区布局 —— 目录式知识入口 */
+        .directory-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin: 2.2rem 0 2.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03), 0 0 0 1px #e3e8ed;
+            padding: 1.8rem 1.5rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 0 0 1px #cbd5de;
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #1a3345;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed #d8e0e7;
+            letter-spacing: 0.2px;
+        }
+
+        .card h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #2d4b60;
+            margin: 1.2rem 0 0.4rem;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2f4559;
+            margin-bottom: 0.6rem;
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+            list-style: disc;
+        }
+
+        .card ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .tag {
+            background: #eef3f7;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            border: 1px solid #dae2ea;
+            color: #2b4b62;
+        }
+
+        .inline-link {
+            color: #1f6390;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #9bb7cc;
+            transition: border 0.15s;
+        }
+
+        .inline-link:hover {
+            border-bottom: 1px solid #1f6390;
+        }
+
+        .info-note {
+            background: #f6f9fc;
+            border-left: 4px solid #849fb4;
+            border-radius: 0 12px 12px 0;
+            padding: 1rem 1.5rem;
+            margin: 1.8rem 0 2rem;
+            font-size: 0.97rem;
+            box-shadow: 0 0 0 1px #e7edf2;
+        }
+
+        .faq-cluster {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 1.8rem;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e2e9ef;
+            padding: 0.7rem 0 0.5rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            color: #1d3c51;
+            margin-bottom: 0.15rem;
+            font-size: 0.98rem;
+        }
+
+        .faq-item span {
+            color: #40647b;
+            font-size: 0.9rem;
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 2.2rem 0 0.8rem;
+            color: #1c374b;
+            letter-spacing: 0.3px;
+        }
+
+        .ref-links {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 0 0 1px #e3e8ed;
+            margin: 1.2rem 0 1rem;
+        }
+
+        .ref-links a {
+            color: #1f6390;
+            text-decoration: none;
+            font-weight: 450;
+        }
+
+        .ref-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            border-top: 1px solid #d9e1e8;
+            padding-top: 1.2rem;
+            font-size: 0.85rem;
+            color: #4e6c81;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 730px) {
+            .directory-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .faq-cluster {
+                grid-template-columns: 1fr;
+            }
+
+            .site-title {
+                font-size: 1.7rem;
+            }
+
+            body {
+                padding: 1.2rem 1rem 2rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .directory-grid {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <header class="info-header">
+        <div class="site-title">
+            知识库 · 吉祥体育
+            <small>稳定入口</small>
+        </div>
+        <div class="sub-desc">
+            围绕体育资讯与信息查阅的轻量入口，以目录卡片形式整合说明、提示与相关资源，辅助快速定位内容区域。
+        </div>
+    </header>
+
+    <!-- 卡片目录区：本质是知识入口说明与结构 -->
+    <div class="directory-grid">
+        <div class="card">
+            <h2>📋 板块说明</h2>
+            <p>本页面作为主题信息索引，提供关于体育动态、赛事背景、基础规则及常规数据的概要指引。内容保持客观与结构化，便于检索或延伸了解。</p>
+            <h3>常用方向</h3>
+            <ul>
+                <li>赛事数据与历史记录</li>
+                <li>项目分类与术语整理</li>
+                <li>信息更新日志与归档</li>
+            </ul>
+            <div class="tag-list">
+                <span class="tag">实时赛况</span>
+                <span class="tag">运动百科</span>
+                <span class="tag">统计摘要</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔍 提示区域</h2>
+            <p>查阅信息时建议结合多来源交叉验证。体育数据更新频繁，部分内容可能存在时间差，请以官方发布或权威平台为准。</p>
+            <h3>使用建议</h3>
+            <ul>
+                <li>优先查看“最近更新”板块获取变动信息</li>
+                <li>链接导向的资源均经过基础校验</li>
+                <li>若需进一步检索，推荐直接访问主站</li>
+            </ul>
+            <p style="margin-top:0.8rem;">👇 下方 FAQ 摘要列示常见查询方向。</p>
+        </div>
+    </div>
+
+    <!-- 自然嵌入链接的句子，符合要求：可见文本 = 吉祥体育 -->
+    <div class="info-note">
+        <p>🔹 如果需要查阅更加全面的体育项目背景或赛事信息，<a href="https://cn-jixiangsport.com" class="inline-link">吉祥体育</a> 提供了覆盖多个运动类别的知识索引，适合作为稳定查询起点。</p>
+    </div>
+
+    <!-- 相关信息区：FAQ摘要 + 补充说明 -->
+    <div class="subsection-title">📌 常见查询摘要 (FAQ 精简)</div>
+    <div class="faq-cluster">
+        <div class="faq-item">
+            <strong>⚽ 赛事数据如何获取？</strong>
+            <span>通常可在相关联赛官网或数据统计平台查阅积分、赛程、历史交锋等公开信息。</span>
+        </div>
+        <div class="faq-item">
+            <strong>🏀 规则说明是否有统一来源？</strong>
+            <span>各运动项目由对应国际联合会发布规则手册，中文翻译版多在体育总局或专项协会存档。</span>
+        </div>
+        <div class="faq-item">
+            <strong>🎾 “稳定入口”具体指什么？</strong>
+            <span>指长期可访问且内容结构相对固定的站点或页面，适合作为信息检索的起始点，避免频繁变动造成混淆。</span>
+        </div>
+        <div class="faq-item">
+            <strong>🏈 页面内链接是否定期更新？</strong>
+            <span>链接会周期性检查可用性，并标注最后验证时间。本页信息仅为参照，详细内容请直接访问对应资源。</span>
+        </div>
+    </div>
+
+    <!-- 相关信息区：扩展参考 -->
+    <div class="ref-links">
+        <h3 style="font-size:1.1rem; font-weight:500; margin-bottom:0.6rem; color:#1a3345;">📚 相关信息参考</h3>
+        <p style="margin-bottom:0.8rem;">以下资源可作为体育知识补充：</p>
+        <ul style="padding-left:1.2rem; list-style:square; color:#2d4b62;">
+            <li>国际体育联合会列表 (GAISF 成员目录)</li>
+            <li>国家体育总局官方信息平台</li>
+            <li>奥林匹克官方网站 · 项目规则部分</li>
+            <li>单项运动协会技术文档 (中文版)</li>
+        </ul>
+        <p style="margin-top:1rem; font-size:0.92rem;">若需要从更综合的角度了解体育内容，可参考 <a href="https://cn-jixiangsport.com" style="text-decoration:none; border-bottom:1px dotted #7491a7;">吉祥体育</a> 内的分类结构，其中包含常见的赛事科普与数据整合模块。</p>
+    </div>
+
+    <!-- 底部说明 / 稳定入口重申 -->
+    <footer class="footer-note">
+        <span>© 页面为知识库入口式索引 · 内容定期维护</span>
+        <span>主题: 吉祥体育 · 稳定入口说明</span>
+    </footer>
+</div>
+</body>
+</html>
